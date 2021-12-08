@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FacturacionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FacturacionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articulos">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Precio_unidad" Type="money" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
@@ -18,7 +18,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ID_Cliente" Type="int" Nullable="false" />
           <Property Name="Cuenta_contable" Type="varchar" MaxLength="50" Nullable="false" />
@@ -31,7 +31,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Documento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cuenta_contable" Type="varchar" MaxLength="50" Nullable="false" />
@@ -41,7 +41,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Vendedor" Type="int" Nullable="false" />
           <Property Name="ID_Cliente" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
@@ -54,7 +54,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Contra" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
@@ -63,12 +63,12 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Comision" Type="int" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Asientos___ID_Cl__693CA210">
+        <Association Name="FK__Asientos___ID_Cl__04E4BC85">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Asientos_Contables" Type="Self.Asientos_Contables" Multiplicity="*" />
           <ReferentialConstraint>
@@ -80,7 +80,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__ID_Ar__66603565">
+        <Association Name="FK__Facturaci__ID_Ar__02084FDA">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -92,7 +92,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__ID_Cl__656C112C">
+        <Association Name="FK__Facturaci__ID_Cl__01142BA1">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -104,7 +104,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__ID_Ve__6477ECF3">
+        <Association Name="FK__Facturaci__ID_Ve__00200768">
           <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,25 +123,24 @@
           <EntitySet Name="Facturacion" EntityType="Self.Facturacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Asientos___ID_Cl__693CA210" Association="Self.FK__Asientos___ID_Cl__693CA210">
+          <AssociationSet Name="FK__Asientos___ID_Cl__04E4BC85" Association="Self.FK__Asientos___ID_Cl__04E4BC85">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Asientos_Contables" EntitySet="Asientos_Contables" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__ID_Ar__66603565" Association="Self.FK__Facturaci__ID_Ar__66603565">
+          <AssociationSet Name="FK__Facturaci__ID_Ar__02084FDA" Association="Self.FK__Facturaci__ID_Ar__02084FDA">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__ID_Cl__656C112C" Association="Self.FK__Facturaci__ID_Cl__656C112C">
+          <AssociationSet Name="FK__Facturaci__ID_Cl__01142BA1" Association="Self.FK__Facturaci__ID_Cl__01142BA1">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__ID_Ve__6477ECF3" Association="Self.FK__Facturaci__ID_Ve__6477ECF3">
+          <AssociationSet Name="FK__Facturaci__ID_Ve__00200768" Association="Self.FK__Facturaci__ID_Ve__00200768">
             <End Role="Vendedores" EntitySet="Vendedores" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FacturacionDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
