@@ -1,14 +1,28 @@
 ﻿@model IEnumerable<PPFF.Models.Cliente>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clientes";
 }
 
-<h2>Index</h2>
+<h2>Clientes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a name="addBtn" class="btn" style="background: #a0c2ff; color: #000000;" href="@Url.Action("Create", "Clientes")">Crear Cliente</a>
 </p>
+
+<br />
+
+<div>
+    <form id="searchFi" method="post">
+
+        <span>
+            <input type="text" id="searchbx" style="max-width: 110px" name="search" />
+            <input type="submit" id="searchbt" value="buscar" />
+        </span>
+    </form>
+</div>
+
+<br />
 <table class="table">
     <tr>
         <th>
@@ -26,26 +40,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Documento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cuenta_contable)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cuenta_contable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                <a name="addBtn" class="btn btn-xs" style="background: #a0c2ff; color: #000000" href="@Url.Action("Edit", "Clientes", new { id = item.ID })">Editar</a> |
+                <a name="addBtn" class="btn btn-xs" style="background: #a0c2ff; color: #000000" href="@Url.Action("Details", "Clientes", new { id = item.ID })">Detalles</a> |
+                <a name="addBtn" class="btn btn-xs" style="background: #a0c2ff; color: #000000" href="@Url.Action("Delete", "Clientes", new { id = item.ID })">Borrar</a> |
+
+            </td>
+        </tr>
+    }
 
 </table>

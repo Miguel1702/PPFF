@@ -123,5 +123,47 @@ namespace PPFF.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult Index(string search)
+        {
+
+            string name = string.Empty;
+            string doc = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                return View("Index");
+            }
+
+            string artName = search;
+
+
+            for (int i = 0; i < artName.Length; i++)
+            {
+                if (char.IsLetter(artName[i]))
+                {
+                    name += artName[i];
+                }
+
+                
+            }
+
+            for (int i=0; i < artName.Length; i++)
+			{
+                if (char.IsDigit(artName[i]))
+				{
+                    doc += artName[i];
+				}
+			}
+
+            var Clientes = db.Clientes.Where(m => m.Nombre.Contains(name) && m.Documento.Contains(doc)).ToList();
+
+            return View(Clientes);
+
+        }
+
+
+
     }
 }

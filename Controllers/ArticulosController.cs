@@ -130,10 +130,10 @@ namespace PPFF.Controllers
         {
             
             string name = string.Empty;
-            string yearparse = string.Empty;
+            
             if (string.IsNullOrWhiteSpace(search))
             {
-                return View("Index");
+                return View(db.Articulos.ToList());
             }
 
             string artName = search;
@@ -152,6 +152,16 @@ namespace PPFF.Controllers
             return View(Artics);
 
         }
+
+        public ActionResult Add(int? id)
+		{
+            List<Articulo> articulos = new List<Articulo>();
+            articulos.Add(item: db.Articulos.Find(id));
+            
+
+
+			return View("Index");
+		}
 
 
 
