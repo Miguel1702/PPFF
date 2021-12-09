@@ -15,6 +15,7 @@ namespace PPFF.Controllers
         private FacturacionDBEntities db = new FacturacionDBEntities();
 
         // GET: Articulos
+        [HttpGet]
         public ActionResult Index()
         {
             return View(db.Articulos.ToList());
@@ -123,5 +124,36 @@ namespace PPFF.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult Index(string search)
+        {
+            
+            string name = string.Empty;
+            string yearparse = string.Empty;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                return View("Index");
+            }
+
+            string artName = search;
+            
+
+            for (int i = 0; i < artName.Length; i++)
+            {
+                if (char.IsLetter(artName[i]))
+                {
+                    name += artName[i];
+                }
+            }
+            
+            var Artics = db.Articulos.Where(m => m.Descripcion.Contains(name)).ToList();
+
+            return View(Artics);
+
+        }
+
+
+
     }
 }
