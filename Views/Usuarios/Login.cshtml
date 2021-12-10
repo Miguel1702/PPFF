@@ -1,0 +1,40 @@
+﻿@model PPFF.Models.Usuario
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Iniciar Sesion</h2>
+<label class="text-danger">@ViewBag.Error</label>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Nombre</label>
+            <div class="col-md-10">
+                <input type="text" name="Nombre" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Contraseña</label>
+            <div class="col-md-10">
+                <input type="password" name="Contra" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

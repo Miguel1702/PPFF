@@ -20,6 +20,30 @@ namespace PPFF.Controllers
             return View(db.Usuarios.ToList());
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string Nombre, string Contra)
+        {
+            var listausuarios = db.Usuarios.ToList();
+            var userfiltered = listausuarios.FirstOrDefault(
+                    u => u.Nombre == Nombre && u.Contra == Contra && u.Estado == true
+                );
+            if (userfiltered == null)
+            {
+                ViewBag.Error = "Credenciales Invalidas";
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         // GET: Usuarios/Details/5
         public ActionResult Details(int? id)
         {
