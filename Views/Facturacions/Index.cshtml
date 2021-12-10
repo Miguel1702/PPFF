@@ -4,11 +4,26 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Facturas</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a name="addBtn" class="btn" style="background: #a0c2ff; color: #000000;" href="@Url.Action("Create", "Facturacions")">Crear Factura</a>
 </p>
+
+<br />
+
+<div>
+    <form id="searchFi" method="post">
+
+        <span>
+            <input type="text" id="searchbx" style="max-width: 110px" name="search" />
+            <input type="submit" id="searchbt" value="buscar" />
+        </span>
+    </form>
+</div>
+
+<br />
+
 <table class="table">
     <tr>
         <th>
@@ -35,35 +50,41 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comentario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio_unidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Articulo.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vendedore.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio_unidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Articulo.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendedore.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
+                <a name="addBtn" class="btn btn-xs" style="background: #a0c2ff; color: #000000" href="@Url.Action("Edit", "Facturacions", new { id = item.ID })">Editar</a> |
+                <a name="addBtn" class="btn btn-xs" style="background: #a0c2ff; color: #000000" href="@Url.Action("Details", "Facturacions", new { id = item.ID })">Detalles</a> |
+                <a name="addBtn" class="btn btn-xs" style="background: #a0c2ff; color: #000000" href="@Url.Action("Delete", "Facturacions", new { id = item.ID })">Borrar</a>
+
+            </td>
+        </tr>
+    }
 
 </table>

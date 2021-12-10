@@ -11,8 +11,9 @@ namespace PPFF.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Vendedore
+	using System.ComponentModel.DataAnnotations;
+
+	public partial class Vendedore
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vendedore()
@@ -22,6 +23,8 @@ namespace PPFF.Models
     
         public int ID { get; set; }
         public string Nombre { get; set; }
+
+        [Range(1, 999999, ErrorMessage = "Valor no permitido")]
         public int Comision { get; set; }
         public bool Estado { get; set; }
     

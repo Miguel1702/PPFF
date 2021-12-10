@@ -11,8 +11,9 @@ namespace PPFF.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Articulo
+	using System.ComponentModel.DataAnnotations;
+
+	public partial class Articulo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Articulo()
@@ -22,6 +23,10 @@ namespace PPFF.Models
     
         public int ID { get; set; }
         public string Descripcion { get; set; }
+
+
+
+        [Range(1, 999999, ErrorMessage = "Valor no permitido")]
         public decimal Precio_unidad { get; set; }
         public bool Estado { get; set; }
     

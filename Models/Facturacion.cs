@@ -11,8 +11,9 @@ namespace PPFF.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Facturacion
+	using System.ComponentModel.DataAnnotations;
+
+	public partial class Facturacion
     {
         public int ID { get; set; }
         public int ID_Vendedor { get; set; }
@@ -20,7 +21,11 @@ namespace PPFF.Models
         public System.DateTime Fecha { get; set; }
         public string Comentario { get; set; }
         public int ID_Articulo { get; set; }
+
+        [Range(1, 999999, ErrorMessage = "Valor no permitido")]
         public int Cantidad { get; set; }
+
+        [Range(1, 999999, ErrorMessage = "Valor no permitido")]
         public decimal Precio_unidad { get; set; }
     
         public virtual Articulo Articulo { get; set; }

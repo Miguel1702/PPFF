@@ -147,5 +147,33 @@ namespace PPFF.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult Index(string search)
+        {
+
+            string name = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                return View(db.Articulos.ToList());
+            }
+
+            string artName = search;
+
+
+            for (int i = 0; i < artName.Length; i++)
+            {
+                if (char.IsLetter(artName[i]))
+                {
+                    name += artName[i];
+                }
+            }
+
+            var Artics = db.Articulos.Where(m => m.Descripcion.Contains(name)).ToList();
+
+            return View(Artics);
+
+        }
     }
 }
