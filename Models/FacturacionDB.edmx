@@ -19,13 +19,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Contabilidad" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="ID_Cliente" Type="int" Nullable="false" />
-          <Property Name="Cuenta_contable" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Tipo_Movimiento" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="Fecha" Type="datetime" Nullable="false" />
-          <Property Name="Monto" Type="money" Nullable="false" />
-          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="ID_Auxiliar" Type="int" Nullable="false" />
+          <Property Name="Codigo_Moneda" Type="int" Nullable="false" />
+          <Property Name="Cuenta_CR" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="MontoCR" Type="money" Nullable="false" />
+          <Property Name="Cuenta_DB" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="MontoDB" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Clientes">
           <Key>
@@ -68,18 +69,6 @@
           <Property Name="Comision" Type="int" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Asientos___ID_Cl__04E4BC85">
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
-          <End Role="Asientos_Contables" Type="Self.Asientos_Contables" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Asientos_Contables">
-              <PropertyRef Name="ID_Cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Facturaci__ID_Ar__02084FDA">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
@@ -123,10 +112,6 @@
           <EntitySet Name="Facturacion" EntityType="Self.Facturacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Asientos___ID_Cl__04E4BC85" Association="Self.FK__Asientos___ID_Cl__04E4BC85">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="Asientos_Contables" EntitySet="Asientos_Contables" />
-          </AssociationSet>
           <AssociationSet Name="FK__Facturaci__ID_Ar__02084FDA" Association="Self.FK__Facturaci__ID_Ar__02084FDA">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Facturacion" EntitySet="Facturacion" />
@@ -154,20 +139,6 @@
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Facturacions" Relationship="Self.FK__Facturaci__ID_Ar__66603565" FromRole="Articulos" ToRole="Facturacion" />
         </EntityType>
-        <EntityType Name="Asientos_Contables">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_Cliente" Type="Int32" Nullable="false" />
-          <Property Name="Cuenta_contable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Tipo_Movimiento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK__Asientos___ID_Cl__693CA210" FromRole="Asientos_Contables" ToRole="Clientes" />
-        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="ID" />
@@ -177,7 +148,6 @@
           <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Cuenta_contable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Asientos_Contables" Relationship="Self.FK__Asientos___ID_Cl__693CA210" FromRole="Clientes" ToRole="Asientos_Contables" />
           <NavigationProperty Name="Facturacions" Relationship="Self.FK__Facturaci__ID_Cl__656C112C" FromRole="Clientes" ToRole="Facturacion" />
         </EntityType>
         <EntityType Name="Facturacion">
@@ -227,18 +197,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Asientos___ID_Cl__693CA210">
-          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="Asientos_Contables" Type="Self.Asientos_Contables" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Asientos_Contables">
-              <PropertyRef Name="ID_Cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Facturaci__ID_Cl__656C112C">
           <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
@@ -265,7 +223,6 @@
         </Association>
         <EntityContainer Name="FacturacionDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articulos" EntityType="Self.Articulo" />
-          <EntitySet Name="Asientos_Contables" EntityType="Self.Asientos_Contables" />
           <EntitySet Name="Clientes" EntityType="Self.Cliente" />
           <EntitySet Name="Facturacions" EntityType="Self.Facturacion" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
@@ -273,10 +230,6 @@
           <AssociationSet Name="FK__Facturaci__ID_Ar__66603565" Association="Self.FK__Facturaci__ID_Ar__66603565">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Facturacion" EntitySet="Facturacions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Asientos___ID_Cl__693CA210" Association="Self.FK__Asientos___ID_Cl__693CA210">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="Asientos_Contables" EntitySet="Asientos_Contables" />
           </AssociationSet>
           <AssociationSet Name="FK__Facturaci__ID_Cl__656C112C" Association="Self.FK__Facturaci__ID_Cl__656C112C">
             <End Role="Clientes" EntitySet="Clientes" />
@@ -286,7 +239,22 @@
             <End Role="Vendedores" EntitySet="Vendedores" />
             <End Role="Facturacion" EntitySet="Facturacions" />
           </AssociationSet>
+          <EntitySet Name="Asientos_Contables" EntityType="FacturacionDBModel.Asientos_Contables" />
         </EntityContainer>
+        <EntityType Name="Asientos_Contables">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Contabilidad" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Auxiliar" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_Moneda" Type="Int32" Nullable="false" />
+          <Property Name="Cuenta_CR" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="MontoCR" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Cuenta_DB" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="MontoDB" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -299,20 +267,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Precio_unidad" ColumnName="Precio_unidad" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Asientos_Contables">
-            <EntityTypeMapping TypeName="FacturacionDBModel.Asientos_Contables">
-              <MappingFragment StoreEntitySet="Asientos_Contables">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
-                <ScalarProperty Name="Cuenta_contable" ColumnName="Cuenta_contable" />
-                <ScalarProperty Name="Tipo_Movimiento" ColumnName="Tipo_Movimiento" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -359,6 +313,21 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Comision" ColumnName="Comision" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asientos_Contables">
+            <EntityTypeMapping TypeName="FacturacionDBModel.Asientos_Contables">
+              <MappingFragment StoreEntitySet="Asientos_Contables">
+                <ScalarProperty Name="MontoDB" ColumnName="MontoDB" />
+                <ScalarProperty Name="Cuenta_DB" ColumnName="Cuenta_DB" />
+                <ScalarProperty Name="MontoCR" ColumnName="MontoCR" />
+                <ScalarProperty Name="Cuenta_CR" ColumnName="Cuenta_CR" />
+                <ScalarProperty Name="Codigo_Moneda" ColumnName="Codigo_Moneda" />
+                <ScalarProperty Name="ID_Auxiliar" ColumnName="ID_Auxiliar" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID_Contabilidad" ColumnName="ID_Contabilidad" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

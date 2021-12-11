@@ -252,12 +252,12 @@
     <Content Include="Views\Vendedores\Details.cshtml" />
     <Content Include="Views\Vendedores\Edit.cshtml" />
     <Content Include="Views\Vendedores\Index.cshtml" />
+    <Content Include="Views\Usuarios\Login.cshtml" />
     <Content Include="Views\Asientos_Contables\Create.cshtml" />
     <Content Include="Views\Asientos_Contables\Delete.cshtml" />
     <Content Include="Views\Asientos_Contables\Details.cshtml" />
     <Content Include="Views\Asientos_Contables\Edit.cshtml" />
     <Content Include="Views\Asientos_Contables\Index.cshtml" />
-    <Content Include="Views\Usuarios\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

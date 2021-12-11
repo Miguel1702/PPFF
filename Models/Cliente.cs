@@ -17,7 +17,6 @@ namespace PPFF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
-            this.Asientos_Contables = new HashSet<Asientos_Contables>();
             this.Facturacions = new HashSet<Facturacion>();
         }
     
@@ -27,8 +26,6 @@ namespace PPFF.Models
         public string Cuenta_contable { get; set; }
         public bool Estado { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asientos_Contables> Asientos_Contables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Facturacion> Facturacions { get; set; }
     }

@@ -15,14 +15,13 @@ namespace PPFF.Models
     public partial class Asientos_Contables
     {
         public int ID { get; set; }
+        public int ID_Contabilidad { get; set; }
         public string Descripcion { get; set; }
-        public int ID_Cliente { get; set; }
-        public string Cuenta_contable { get; set; }
-        public string Tipo_Movimiento { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public decimal Monto { get; set; }
-        public bool Estado { get; set; }
-    
-        public virtual Cliente Cliente { get; set; }
+        public int ID_Auxiliar { get; set; }
+        public int Codigo_Moneda { get; set; }
+        public string Cuenta_CR { get; set; }
+        public decimal MontoCR { get; set; }
+        public string Cuenta_DB { get; set; }
+        public decimal MontoDB { get; set; }
     }
 }
