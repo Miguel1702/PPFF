@@ -12,6 +12,7 @@ namespace PPFF.Controllers
 {
     public class ClientesController : Controller
     {
+        
         private FacturacionDBEntities db = new FacturacionDBEntities();
 
         // GET: Clientes
@@ -50,9 +51,25 @@ namespace PPFF.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Clientes.Add(cliente);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+				if (cliente.Documento == null) {
+
+                    ViewBag.Message = "Ingrese documento de nuevo";
+
+                }
+				else {
+
+                    var val = validaCedula(cliente.Documento);
+					if (val) {
+                        db.Clientes.Add(cliente);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+					}
+					else
+					{
+                        ViewBag.Message = "Ingrese documento de nuevo";
+                    }
+                    
+                }
             }
 
             return View(cliente);
@@ -161,6 +178,32 @@ namespace PPFF.Controllers
 
             return View(Clientes);
 
+        }
+
+        public static bool validaCedula(string pCedula)
+
+        {
+            int vnTotal = 0;
+            string vcCedula = pCedula.Replace("-", "");
+            int pLongCed = vcCedula.Trim().Length;
+            int[] digitoMult = new int[11] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+
+            if (pLongCed < 11 || pLongCed > 11)
+                return false;
+
+            for (int vDig = 1; vDig <= pLongCed; vDig++)
+            {
+                int vCalculo = Int32.Parse(vcCedula.Substring(vDig - 1, 1)) * digitoMult[vDig - 1];
+                if (vCalculo < 10)
+                    vnTotal += vCalculo;
+                else
+                    vnTotal += Int32.Parse(vCalculo.ToString().Substring(0, 1)) + Int32.Parse(vCalculo.ToString().Substring(1, 1));
+            }
+
+            if (vnTotal % 10 == 0)
+                return true;
+            else
+                return false;
         }
 
 
