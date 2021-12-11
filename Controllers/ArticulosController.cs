@@ -160,7 +160,7 @@ namespace PPFF.Controllers
             
 
 
-			return View("Index");
+			return RedirectToAction("Contacts", "Home");
 		}
 
 
