@@ -17,28 +17,38 @@
                     <span class="icon-bar"></span>
                 </button>
                 
-                @*@Html.ActionLink("Facturación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 
                 <ul class="nav navbar-nav">
                     <li>
                         <div class="dropdown" style="top: 5px;">
-                            <button class=" navbar-btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="background-color: #222222; color:#8b9194; border:none; ">
-                                Sistemas
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Articulos")">Articulos</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Clientes")">Clientes</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Usuarios")">Usuarios</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Vendedores")">Vendedores</a></li>
-                            </ul>
+                            @if (ViewBag.Title != "Login")
+                            {
+                                <button class=" navbar-btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="background-color: #222222; color:#8b9194; border:none; ">
+                                    Sistemas
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Articulos")">Articulos</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Clientes")">Clientes</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Usuarios")">Usuarios</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","Vendedores")">Vendedores</a></li>
+                                </ul>
+                            }
                         </div>
                     </li>
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Facturas", "Index", "Facturacions")</li>
-                    <li>@Html.ActionLink("Asientos Contables", "Index", "Asientos_Contables")</li>
+                    @if (ViewBag.Title != "Login")
+                    {
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Facturas", "Index", "Facturacions")</li>
+                        <li>@Html.ActionLink("Asientos Contables", "Index", "Asientos_Contables")</li>
+                        <li>@Html.ActionLink("Cerrar Sesion", "Login", "Usuarios")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Inicio", "Login", "Usuarios")</li>
+                    }
 
 
                 </ul>
