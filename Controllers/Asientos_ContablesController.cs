@@ -76,14 +76,16 @@ namespace PPFF.Controllers
 
                 string Baseurl = "https://accountingaccountapi20211205021409.azurewebsites.net/";
                     var client = new HttpClient();
-                    List<Body> bodis = new List<Body>();
-                        bodis.Add(body);
+                    //List<Body> bodis = new List<Body>();
+                    //    bodis.Add(body);
                         //Passing service base url
                         client.BaseAddress = new Uri(Baseurl);
                         client.DefaultRequestHeaders.Clear();
                         //Define request data format
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        HttpContent content = new StringContent(JsonConvert.SerializeObject(bodis));
+                        HttpContent content = new StringContent(JsonConvert.SerializeObject(body));
+                        content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        content.Headers.ContentType.CharSet = "utf-8";
                         //Sending request to find web api REST service resource GetAllEmployees using HttpClient
                         HttpResponseMessage Res = await client.PostAsync("api/AccountingSeat/Register", content);
                         //Checking the response is successful or not which is sent using HttpClient
@@ -94,7 +96,7 @@ namespace PPFF.Controllers
                             //Deserializing the response recieved from web api and storing into the Employee list
                             resp Respu = JsonConvert.DeserializeObject<resp>(Response);
 
-                            asientos_Contables.ID = Respu.value;
+                            asientos_Contables.ID = int.Parse(Respu.id);
 
                             db.Asientos_Contables.Add(asientos_Contables);
                             db.SaveChanges();
