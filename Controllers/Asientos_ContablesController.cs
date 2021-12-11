@@ -17,8 +17,7 @@ namespace PPFF.Controllers
         // GET: Asientos_Contables
         public ActionResult Index()
         {
-            var asientos_Contables = db.Asientos_Contables.Include(a => a.Cliente);
-            return View(asientos_Contables.ToList());
+            return View(db.Asientos_Contables.ToList());
         }
 
         // GET: Asientos_Contables/Details/5
@@ -39,7 +38,6 @@ namespace PPFF.Controllers
         // GET: Asientos_Contables/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Cliente = new SelectList(db.Clientes, "ID", "Nombre");
             return View();
         }
 
@@ -48,7 +46,7 @@ namespace PPFF.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Descripcion,ID_Cliente,Cuenta_contable,Tipo_Movimiento,Fecha,Monto,Estado")] Asientos_Contables asientos_Contables)
+        public ActionResult Create([Bind(Include = "ID,ID_Contabilidad,Descripcion,ID_Auxiliar,Codigo_Moneda,Cuenta_CR,MontoCR,Cuenta_DB,MontoDB")] Asientos_Contables asientos_Contables)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +55,6 @@ namespace PPFF.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Cliente = new SelectList(db.Clientes, "ID", "Nombre", asientos_Contables.ID_Cliente);
             return View(asientos_Contables);
         }
 
@@ -73,7 +70,6 @@ namespace PPFF.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Cliente = new SelectList(db.Clientes, "ID", "Nombre", asientos_Contables.ID_Cliente);
             return View(asientos_Contables);
         }
 
@@ -82,7 +78,7 @@ namespace PPFF.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Descripcion,ID_Cliente,Cuenta_contable,Tipo_Movimiento,Fecha,Monto,Estado")] Asientos_Contables asientos_Contables)
+        public ActionResult Edit([Bind(Include = "ID,ID_Contabilidad,Descripcion,ID_Auxiliar,Codigo_Moneda,Cuenta_CR,MontoCR,Cuenta_DB,MontoDB")] Asientos_Contables asientos_Contables)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace PPFF.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Cliente = new SelectList(db.Clientes, "ID", "Nombre", asientos_Contables.ID_Cliente);
             return View(asientos_Contables);
         }
 

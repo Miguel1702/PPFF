@@ -12,25 +12,28 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ID_Contabilidad)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cuenta_contable)
+            @Html.DisplayNameFor(model => model.ID_Auxiliar)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tipo_Movimiento)
+            @Html.DisplayNameFor(model => model.Codigo_Moneda)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Fecha)
+            @Html.DisplayNameFor(model => model.Cuenta_CR)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Monto)
+            @Html.DisplayNameFor(model => model.MontoCR)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Estado)
+            @Html.DisplayNameFor(model => model.Cuenta_DB)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cliente.Nombre)
+            @Html.DisplayNameFor(model => model.MontoDB)
         </th>
         <th></th>
     </tr>
@@ -38,25 +41,28 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.ID_Contabilidad)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cuenta_contable)
+            @Html.DisplayFor(modelItem => item.ID_Auxiliar)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Tipo_Movimiento)
+            @Html.DisplayFor(modelItem => item.Codigo_Moneda)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
+            @Html.DisplayFor(modelItem => item.Cuenta_CR)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Monto)
+            @Html.DisplayFor(modelItem => item.MontoCR)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @Html.DisplayFor(modelItem => item.Cuenta_DB)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cliente.Nombre)
+            @Html.DisplayFor(modelItem => item.MontoDB)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
